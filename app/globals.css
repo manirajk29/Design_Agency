@@ -1,26 +1,114 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050508; /* Consistent dark premium theme */
+  --foreground: #94a3b8; /* Slate-400 for neutral text */
+  --card: #0b0f19; /* Deep indigo-tinted dark card bg */
+  --card-border: rgba(255, 255, 255, 0.05); /* Thin outline border */
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --font-sans: var(--font-inter), sans-serif;
+  --font-bebas: var(--font-bebas-neue), sans-serif;
+  
+  /* Animations & Keyframes */
+  @keyframes blob-float {
+    0%, 100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -45px) scale(1.1);
+    }
+    66% {
+      transform: translate(-25px, 20px) scale(0.95);
+    }
   }
+  @keyframes blob-float-delayed {
+    0%, 100% {
+      transform: translate(0px, 0px) scale(1.05);
+    }
+    50% {
+      transform: translate(-30px, 30px) scale(0.9);
+    }
+  }
+  @keyframes spin-slow {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  --animate-blob-float: blob-float 15s ease-in-out infinite;
+  --animate-blob-float-delayed: blob-float-delayed 18s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 20s linear infinite;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050508;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b; /* slate-800 */
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155; /* slate-700 */
+}
+
+/* Animated Underline Effect for Menu Links */
+.animated-underline {
+  position: relative;
+}
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1.5px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animated-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Glassmorphism panel cards */
+.glass-card {
+  background: rgba(11, 15, 25, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glow-card-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glow-card-hover:hover {
+  border-color: rgba(99, 102, 241, 0.25); /* Subtle indigo border glow */
+  box-shadow: 0 15px 30px -10px rgba(99, 102, 241, 0.15), 
+              0 0 20px -5px rgba(99, 102, 241, 0.03);
+}
+
+html {
+  scroll-behavior: smooth;
 }
