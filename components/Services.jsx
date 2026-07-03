@@ -1,142 +1,209 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Layers, Code2, Compass, TrendingUp, ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const services = [
   {
-    icon: Layers,
-    title: "UI/UX Design",
-    description: "Designing beautiful, intuitive interfaces optimized for seamless user journeys, high engagement, and polished brand alignment.",
-    color: "group-hover:text-[#b4fe1e]",
+    title: "BRANDING",
+    image: "/images/services_1.png",
+    fallbackImage: "/images/collage1.png",
   },
   {
-    icon: Code2,
-    title: "Web Development",
-    description: "Building fast, SEO-friendly, and secure web applications utilizing modern stacks like Next.js, React, and Tailwind CSS.",
-    color: "group-hover:text-[#b4fe1e]",
+    title: "MARKETING",
+    image: "/images/services_2.png",
+    fallbackImage: "/images/collage2.png",
   },
   {
-    icon: Compass,
-    title: "Branding",
-    description: "Crafting memorable visual identities, logos, style guides, and design languages that communicate your mission and values.",
-    color: "group-hover:text-[#b4fe1e]",
+    title: "DESIGN",
+    image: "/images/services_3.png",
+    fallbackImage: "/images/collage3.png",
   },
   {
-    icon: TrendingUp,
-    title: "Digital Marketing",
-    description: "Scaling your online presence through data-driven campaigns, conversion rate optimization, and growth strategy.",
-    color: "group-hover:text-[#b4fe1e]",
+    title: "WEBSITE",
+    image: "/images/services_4.png",
+    fallbackImage: "/images/collage4.png",
+  },
+  {
+    title: "APPLICATION",
+    image: "/images/services_5.png",
+    fallbackImage: "/images/collage5.png",
   },
 ];
 
-export default function Services() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
+const ServiceImage = ({ src, fallback, index }) => {
+  const [imgSrc, setImgSrc] = useState(src);
+  return (
+    <div
+      className="service-image absolute inset-0 w-full h-full transition-opacity duration-300"
+      style={{ zIndex: index === 0 ? 1 : 0 }}
+    >
+      <Image
+        src={imgSrc}
+        alt={`Service Image ${index + 1}`}
+        fill
+        className="object-cover object-center"
+        sizes="(max-width: 768px) 100vw, 50vw"
+        onError={() => setImgSrc(fallback)}
+        priority={index === 0}
+      />
+      {/* Dark overlay to match the premium theme */}
+      <div className="absolute inset-0 bg-black/10 dark:bg-black/25 pointer-events-none" />
+    </div>
+  );
+};
 
-  const itemVariants = {
-    hidden: { y: 35, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  };
+export default function Services() {
+  const sectionRef = useRef(null);
+  const containerRef = useRef(null);
+  const titlesListRef = useRef(null);
+
+  useEffect(() => {
+    let ctx;
+    
+    const initGSAP = () => {
+      if (ctx) ctx.revert();
+
+      ctx = gsap.context(() => {
+        const titles = gsap.utils.toArray(".service-title-text");
+        const images = gsap.utils.toArray(".service-image");
+        const titleItems = gsap.utils.toArray(".service-title-item");
+        const titlesList = titlesListRef.current;
+
+        if (!titlesList || titles.length === 0 || images.length === 0) return;
+
+        // Set initial state
+        gsap.set(images, { opacity: 0 });
+        gsap.set(images[0], { opacity: 1 });
+        
+        gsap.set(titles, { opacity: 0.15 });
+        gsap.set(titles[0], { opacity: 1 });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "+=300%", // 300% of viewport height scroll distance
+            pin: true,
+            scrub: 1.2,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // Loop through services to create steps
+        for (let i = 0; i < services.length - 1; i++) {
+          const nextIdx = i + 1;
+          const label = `step-${i}`;
+          tl.addLabel(label);
+
+          // 1. Crossfade images (duration: 1)
+          tl.to(images[i], { opacity: 0, duration: 1 }, label);
+          tl.to(images[nextIdx], { opacity: 1, duration: 1 }, label);
+
+          // 2. Animate text highlight (duration: 1)
+          tl.to(titles[i], { opacity: 0.15, duration: 1 }, label);
+          tl.to(titles[nextIdx], { opacity: 1, duration: 1 }, label);
+
+          // 3. Slide the titles container up (duration: 1)
+          tl.to(titlesList, {
+            y: () => {
+              const itemHeight = titleItems[0].offsetHeight;
+              return -itemHeight * nextIdx;
+            },
+            duration: 1,
+            ease: "power2.inOut",
+          }, label);
+        }
+      }, sectionRef);
+    };
+
+    // Delay slightly to ensure layout and heights are computed correctly
+    const timer = setTimeout(() => {
+      initGSAP();
+      ScrollTrigger.refresh();
+    }, 200);
+
+    const handleResize = () => {
+      initGSAP();
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
-    <section id="services" className="relative py-24 sm:py-32 bg-[var(--background)] overflow-hidden">
-      {/* Subtle Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#b4fe1e]/[0.012] blur-[160px] pointer-events-none" />
+    <section 
+      ref={sectionRef} 
+      id="services" 
+      className="relative w-full bg-[var(--background)] overflow-hidden"
+    >
+      <div 
+        ref={containerRef} 
+        className="h-screen w-full flex items-center justify-center relative py-12 md:py-24"
+      >
+        <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+          
+          {/* Left Column: Image Panel */}
+          <div className="col-span-1 md:col-span-5 flex justify-center items-center">
+            <div className="relative w-full aspect-[4/3] max-w-[450px] md:max-w-none rounded-2xl overflow-hidden border border-[var(--border-color-custom)] shadow-2xl bg-[var(--card)]">
+              {services.map((service, index) => (
+                <ServiceImage
+                  key={index}
+                  src={service.image}
+                  fallback={service.fallbackImage}
+                  index={index}
+                />
+              ))}
+            </div>
+          </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-4"
-          >
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-350">
-              Our Expertise
+          {/* Right Column: Titles */}
+          <div className="col-span-1 md:col-span-7 flex flex-col justify-center pl-0 md:pl-12">
+            {/* Category Marker */}
+            <span className="text-[#b4fe1e] italic text-sm md:text-base font-semibold mb-4 block select-none">
+              services
             </span>
-          </motion.div>
-          
-          <motion.h2
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight"
-          >
-            We Design Products That Shape The Future
-          </motion.h2>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-base sm:text-lg text-slate-400 font-medium leading-relaxed"
-          >
-            From high-fidelity UI/UX design to robust code development and growth marketing, we provide full-lifecycle digital agency support.
-          </motion.p>
-        </div>
-
-        {/* Services Grid (4 Cards) */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {services.map((service) => {
-            const IconComponent = service.icon;
-            return (
-              <motion.div
-                key={service.title}
-                variants={itemVariants}
-                className="group relative rounded-2xl bg-[#0b0f19]/35 p-8 border border-white/5 hover:border-[#b4fe1e]/20 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-2xl hover:shadow-[#b4fe1e]/5 flex flex-col justify-between"
+            
+            {/* Window Container with Bottom Fade Mask */}
+            <div 
+              className="relative h-[250px] md:h-[450px] overflow-hidden flex items-start w-full"
+              style={{
+                maskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
+              }}
+            >
+              <div 
+                ref={titlesListRef} 
+                className="service-titles-list flex flex-col w-full"
               >
-                <div>
-                  {/* Icon Container */}
-                  <div className="relative h-12 w-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/10 group-hover:scale-105 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                    <IconComponent className={`h-6 w-6 text-slate-350 transition-colors duration-300 ${service.color}`} />
+                {services.map((service, index) => (
+                  <div
+                    key={index}
+                    className="service-title-item flex items-center h-[50px] md:h-[90px] w-full"
+                  >
+                    <h3 className="service-title-text text-4xl md:text-7xl lg:text-8xl font-black font-bebas tracking-wide uppercase select-none leading-none text-[var(--text-black-custom)]">
+                      {service.title}
+                    </h3>
                   </div>
+                ))}
+              </div>
+            </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-white mb-3 transition-colors duration-300">
-                    {service.title}
-                  </h3>
+          </div>
 
-                  {/* Description */}
-                  <p className="text-slate-450 text-sm leading-relaxed mb-6 font-medium transition-colors duration-350 group-hover:text-slate-300">
-                    {service.description}
-                  </p>
-                </div>
-
-                {/* Card Action Link */}
-                <div className="flex items-center gap-1 text-xs font-semibold text-slate-400 group-hover:text-white transition-colors duration-300 cursor-pointer pt-4 border-t border-white/5">
-                  Explore Service
-                  <ArrowUpRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]" />
-                </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
