@@ -40,11 +40,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo (Inter font, clean styling) */}
         <a href="#home" className="flex items-center gap-2.5 group">
-          <span className="h-8 w-8 rounded-lg bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-bold text-white text-sm shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
+          <span className="h-8 w-8 rounded-lg bg-gradient-to-tr from-[#b4fe1e] to-emerald-400 flex items-center justify-center font-black text-black text-sm shadow-md shadow-[#b4fe1e]/25 group-hover:scale-105 transition-transform duration-300">
             D
           </span>
           <span className="text-xl font-bold tracking-tight text-white transition-colors duration-300">
-            Design <span className="text-slate-400 group-hover:text-indigo-400 transition-colors duration-300">Agency</span>
+            Design <span className="text-slate-400 group-hover:text-[#b4fe1e] transition-colors duration-300">Agency</span>
           </span>
         </a>
 

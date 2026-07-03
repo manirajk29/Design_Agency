@@ -8,25 +8,25 @@ const services = [
     icon: Layers,
     title: "UI/UX Design",
     description: "Designing beautiful, intuitive interfaces optimized for seamless user journeys, high engagement, and polished brand alignment.",
-    color: "group-hover:text-indigo-400",
+    color: "group-hover:text-[#b4fe1e]",
   },
   {
     icon: Code2,
     title: "Web Development",
     description: "Building fast, SEO-friendly, and secure web applications utilizing modern stacks like Next.js, React, and Tailwind CSS.",
-    color: "group-hover:text-purple-400",
+    color: "group-hover:text-[#b4fe1e]",
   },
   {
     icon: Compass,
     title: "Branding",
     description: "Crafting memorable visual identities, logos, style guides, and design languages that communicate your mission and values.",
-    color: "group-hover:text-pink-400",
+    color: "group-hover:text-[#b4fe1e]",
   },
   {
     icon: TrendingUp,
     title: "Digital Marketing",
     description: "Scaling your online presence through data-driven campaigns, conversion rate optimization, and growth strategy.",
-    color: "group-hover:text-indigo-400",
+    color: "group-hover:text-[#b4fe1e]",
   },
 ];
 
@@ -56,7 +56,7 @@ export default function Services() {
   return (
     <section id="services" className="relative py-24 sm:py-32 bg-[#050508] overflow-hidden">
       {/* Subtle Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-indigo-500/[0.02] blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#b4fe1e]/[0.012] blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -109,7 +109,7 @@ export default function Services() {
               <motion.div
                 key={service.title}
                 variants={itemVariants}
-                className="group relative rounded-2xl bg-[#0b0f19]/35 p-8 border border-white/5 hover:border-indigo-500/20 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-2xl hover:shadow-indigo-500/10 flex flex-col justify-between"
+                className="group relative rounded-2xl bg-[#0b0f19]/35 p-8 border border-white/5 hover:border-[#b4fe1e]/20 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-2xl hover:shadow-[#b4fe1e]/5 flex flex-col justify-between"
               >
                 <div>
                   {/* Icon Container */}

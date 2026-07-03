@@ -199,8 +199,8 @@ export default function Portfolio() {
                   onClick={() => setActiveCategory(category)}
                   className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 ease-in-out cursor-pointer border ${
                     activeCategory === category
-                      ? "bg-white border-white text-black shadow-sm"
-                      : "bg-white/5 border-white/5 text-slate-400 hover:bg-white/10 hover:border-white/15 hover:text-white"
+                      ? "bg-[#b4fe1e] border-[#b4fe1e] text-black shadow-sm"
+                      : "bg-white/5 border-white/5 text-slate-400 hover:bg-[#b4fe1e]/10 hover:border-[#b4fe1e]/20 hover:text-[#b4fe1e]"
                   }`}
                 >
                   {category}
@@ -223,7 +223,7 @@ export default function Portfolio() {
                   layout
                   variants={itemVariants}
                   key={project.title}
-                  className="group relative rounded-2xl overflow-hidden bg-[#0b0f19]/30 aspect-[4/3] border border-white/5 flex flex-col justify-end"
+                  className="group relative rounded-2xl overflow-hidden bg-[#0b0f19]/30 aspect-[4/3] border border-white/5 hover:border-[#b4fe1e]/20 hover:shadow-2xl hover:shadow-[#b4fe1e]/5 flex flex-col justify-end"
                 >
                   {/* Image Zoom */}
                   <div className="absolute inset-0 z-0 overflow-hidden transition-transform duration-500 ease-in-out group-hover:scale-105">
@@ -257,7 +257,7 @@ export default function Portfolio() {
 
                     <a
                       href={project.link}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-450 hover:text-white transition-all duration-300"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-450 hover:text-[#b4fe1e] transition-all duration-300"
                     >
                       View Project
                       <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

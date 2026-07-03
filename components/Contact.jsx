@@ -57,7 +57,7 @@ export default function Contact() {
   return (
     <section id="contact" className="relative py-24 sm:py-32 bg-[#050508] overflow-hidden">
       {/* Background Decorative Blob */}
-      <div className="absolute top-1/2 left-1/4 w-[450px] h-[450px] rounded-full bg-indigo-500/[0.01] blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 w-[450px] h-[450px] rounded-full bg-[#b4fe1e]/[0.008] blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
@@ -149,7 +149,7 @@ export default function Contact() {
                         className={`w-full px-4 py-3.5 rounded-xl bg-white/5 border text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 hover:border-white/15 focus:bg-white/10 ${
                           errors.name
                             ? "border-red-500/50 focus:border-red-500"
-                            : "border-white/10 focus:border-indigo-500/50"
+                            : "border-white/10 focus:border-[#b4fe1e]/50"
                         }`}
                       />
                       {errors.name && (
@@ -175,7 +175,7 @@ export default function Contact() {
                         className={`w-full px-4 py-3.5 rounded-xl bg-white/5 border text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 hover:border-white/15 focus:bg-white/10 ${
                           errors.email
                             ? "border-red-500/50 focus:border-red-500"
-                            : "border-white/10 focus:border-indigo-500/50"
+                            : "border-white/10 focus:border-[#b4fe1e]/50"
                         }`}
                       />
                       {errors.email && (
@@ -201,7 +201,7 @@ export default function Contact() {
                         className={`w-full px-4 py-3.5 rounded-xl bg-white/5 border text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 resize-none hover:border-white/15 focus:bg-white/10 ${
                           errors.message
                             ? "border-red-500/50 focus:border-red-500"
-                            : "border-white/10 focus:border-indigo-500/50"
+                            : "border-white/10 focus:border-[#b4fe1e]/50"
                         }`}
                       />
                       {errors.message && (
@@ -216,7 +216,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full flex items-center justify-center gap-2 py-4 rounded-full bg-white text-black font-bold text-sm hover:bg-slate-200 transition-all duration-300 hover:scale-105 active:scale-98 shadow-md hover:shadow-indigo-500/10 cursor-pointer disabled:opacity-50 select-none"
+                      className="w-full flex items-center justify-center gap-2 py-4 rounded-full bg-[#b4fe1e] text-black font-bold text-sm hover:bg-[#bef264] transition-all duration-300 hover:scale-105 active:scale-98 shadow-md hover:shadow-[#b4fe1e]/15 cursor-pointer disabled:opacity-50 select-none"
                     >
                       {isSubmitting ? (
                         <span className="h-5 w-5 border-2 border-black border-t-transparent rounded-full animate-spin" />

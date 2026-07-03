@@ -13,8 +13,8 @@ export default function Home() {
       <main className="flex-grow">
         <Hero />
         <About />
-        <Services />
         <Portfolio />
+        <Services />
         <Contact />
       </main>
       <Footer />

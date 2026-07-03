@@ -55,7 +55,7 @@ export default function Footer() {
     <footer className="relative bg-[#050508] border-t border-white/5 pt-20 pb-12 overflow-hidden select-none">
       
       {/* Light glow at the bottom */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-[150px] rounded-full bg-indigo-500/[0.02] blur-[80px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-[150px] rounded-full bg-[#b4fe1e]/[0.01] blur-[80px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -65,7 +65,7 @@ export default function Footer() {
           {/* Column 1: Ready heading and socials */}
           <div className="md:col-span-6 flex flex-col gap-6">
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight uppercase max-w-md tracking-tight">
-              Ready to become our <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">next success story?</span>
+              Ready to become our <span className="bg-gradient-to-r from-[#b4fe1e] to-emerald-400 bg-clip-text text-transparent">next success story?</span>
             </h3>
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm font-medium">
               Let’s create measurable growth, stronger brand presence, and real business impact with a strategy tailored to your goals.
@@ -81,7 +81,7 @@ export default function Footer() {
                       key={item.name}
                       href={item.href}
                       aria-label={`Visit our ${item.name}`}
-                      className="h-10 w-10 rounded-full bg-white/5 border border-white/5 hover:border-indigo-500/20 hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-all duration-300 cursor-pointer"
+                      className="h-10 w-10 rounded-full bg-white/5 border border-white/5 hover:border-[#b4fe1e]/30 hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-[#b4fe1e] transition-all duration-300 cursor-pointer"
                     >
                       <IconComponent />
                     </a>
@@ -135,7 +135,7 @@ export default function Footer() {
             <button
               onClick={scrollToTop}
               aria-label="Scroll to top"
-              className="h-8 w-8 rounded-full bg-white/5 border border-white/5 hover:border-indigo-500/30 flex items-center justify-center text-slate-400 hover:text-white cursor-pointer hover:bg-white/10 transition-all duration-300"
+              className="h-8 w-8 rounded-full bg-white/5 border border-white/5 hover:border-[#b4fe1e]/35 flex items-center justify-center text-slate-400 hover:text-[#b4fe1e] cursor-pointer hover:bg-white/10 transition-all duration-300"
             >
               <ArrowUp className="h-4 w-4" />
             </button>
