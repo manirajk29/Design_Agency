@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
+import TransitionMarquee from "@/components/TransitionMarquee";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -14,6 +15,7 @@ export default function Home() {
         <Hero />
         <About />
         <Portfolio />
+        <TransitionMarquee />
         <Services />
         <Contact />
       </main>

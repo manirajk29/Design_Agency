@@ -275,16 +275,16 @@ export default function Portfolio() {
           </div>
 
           {/* Fullscreen Overlay with reference image styling */}
-          <div className="portfolio-fullscreen-overlay absolute inset-0 flex flex-col items-center justify-center z-40 opacity-0 pointer-events-none bg-black/30">
+          <div className="portfolio-fullscreen-overlay absolute inset-0 flex flex-col items-center justify-center z-40 opacity-0 pointer-events-none bg-black/35">
             <div className="flex flex-col items-center justify-center text-center px-6 w-full max-w-7xl mx-auto">
-              <h2 className="text-white font-bold leading-[0.8] tracking-tighter uppercase font-bebas text-[11vw] md:text-[8vw] select-none flex flex-col items-center gap-1.5 md:gap-3">
+              <h2 className="text-white font-bold leading-[0.8] tracking-tighter uppercase font-bebas text-[11vw] md:text-[9vw] select-none text-center">
                 <span className="block">CREATIVITY</span>
                 <span className="block">TECHNOLOGY</span>
                 <span className="block">AND</span>
                 <span className="block">STRATEGY</span>
               </h2>
 
-              <p className="text-[#e2e8f0] text-xs sm:text-sm md:text-base max-w-lg sm:max-w-xl md:max-w-2xl leading-relaxed mt-10 sm:mt-12 md:mt-16 px-4 font-sans font-medium">
+              <p className="text-[#e2e8f0]/90 text-xs sm:text-sm md:text-base max-w-lg sm:max-w-xl md:max-w-2xl leading-relaxed mt-8 sm:mt-12 md:mt-14 px-4 font-sans font-medium text-center">
                 We are a modern creative agency helping brands to transform ideas
                 into impactful digital experiences from strategy to execution.
               </p>
