@@ -1,14 +1,76 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function Hero() {
+  const containerRef = useRef(null);
+  const avatarRefs = useRef([]);
+  const placeholderRefs = useRef([]);
+
+  useEffect(() => {
+    // Register ScrollTrigger plugin on the client
+    gsap.registerPlugin(ScrollTrigger);
+
+    let ctx = gsap.context(() => {
+      // Create a timeline linked to the scroll trigger
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=100%", // Pin and animate over 100% viewport scroll height
+          scrub: 1, // Smooth scrub linked directly to scroll bar
+          pin: true, // Pin the Hero element in the viewport
+          markers: true, // Show scroll markers visually
+          invalidateOnRefresh: true, // Recalculate offsets on resize
+        },
+      });
+
+      // Animate each of the 4 absolute header avatars to morph into their bottom row placeholders
+      [0, 1, 2, 3].forEach((idx) => {
+        const avatar = avatarRefs.current[idx];
+        const placeholder = placeholderRefs.current[idx];
+        if (!avatar || !placeholder) return;
+
+        tl.to(
+          avatar,
+          {
+            x: () => {
+              const aRect = avatar.getBoundingClientRect();
+              const pRect = placeholder.getBoundingClientRect();
+              return pRect.left - aRect.left;
+            },
+            y: () => {
+              const aRect = avatar.getBoundingClientRect();
+              const pRect = placeholder.getBoundingClientRect();
+              return pRect.top - aRect.top;
+            },
+            scale: () => {
+              const aRect = avatar.getBoundingClientRect();
+              const pRect = placeholder.getBoundingClientRect();
+              return pRect.width / aRect.width;
+            },
+            borderWidth: "2px",
+            borderColor: "var(--background)",
+            ease: "power1.inOut",
+          },
+          0
+        ); // start all animations simultaneously
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={containerRef}
       id="home"
-      className="relative h-[100dvh] min-h-[600px] flex flex-col items-center justify-between pt-24 pb-8 overflow-hidden bg-[#050508]"
+      className="relative h-[100dvh] w-full flex flex-col items-center justify-between pt-24 pb-8 overflow-hidden bg-[var(--background)]"
     >
       {/* Background glow overlay */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-indigo-500/[0.015] blur-[155px] pointer-events-none" />
@@ -29,7 +91,10 @@ export default function Hero() {
           </h1>
 
           {/* Avatar 1: Overlaps Left side of C */}
-          <div className="absolute top-[6%] left-[-4%] w-[11.5vw] h-[11.5vw] max-w-[150px] max-h-[150px] min-w-[55px] min-h-[55px] rounded-full overflow-hidden border-[0.3vw] md:border-[5px] border-[#050508] shadow-2xl z-20 select-none">
+          <div
+            ref={(el) => (avatarRefs.current[0] = el)}
+            className="absolute top-[6%] left-[-4%] w-[11.5vw] h-[11.5vw] max-w-[150px] max-h-[150px] min-w-[55px] min-h-[55px] rounded-full overflow-hidden border-[0.3vw] md:border-[5px] border-[var(--background)] shadow-2xl z-20 select-none"
+          >
             <Image
               src="/images/avatar1.png"
               alt="Creative portrait 1"
@@ -40,7 +105,10 @@ export default function Hero() {
           </div>
 
           {/* Avatar 2: Overlaps Top right area of I */}
-          <div className="absolute top-[6%] left-[67%] w-[11.5vw] h-[11.5vw] max-w-[150px] max-h-[150px] min-w-[55px] min-h-[55px] rounded-full overflow-hidden border-[0.3vw] md:border-[5px] border-[#050508] shadow-2xl z-20 select-none">
+          <div
+            ref={(el) => (avatarRefs.current[1] = el)}
+            className="absolute top-[6%] left-[67%] w-[11.5vw] h-[11.5vw] max-w-[150px] max-h-[150px] min-w-[55px] min-h-[55px] rounded-full overflow-hidden border-[0.3vw] md:border-[5px] border-[var(--background)] shadow-2xl z-20 select-none"
+          >
             <Image
               src="/images/avatar2.png"
               alt="Creative portrait 2"
@@ -51,7 +119,10 @@ export default function Hero() {
           </div>
 
           {/* Avatar 3: Overlaps Bottom Left area of S */}
-          <div className="absolute bottom-[8%] left-[8%] w-[11.5vw] h-[11.5vw] max-w-[150px] max-h-[150px] min-w-[55px] min-h-[55px] rounded-full overflow-hidden border-[0.3vw] md:border-[5px] border-[#050508] shadow-2xl z-20 select-none">
+          <div
+            ref={(el) => (avatarRefs.current[2] = el)}
+            className="absolute bottom-[8%] left-[8%] w-[11.5vw] h-[11.5vw] max-w-[150px] max-h-[150px] min-w-[55px] min-h-[55px] rounded-full overflow-hidden border-[0.3vw] md:border-[5px] border-[var(--background)] shadow-2xl z-20 select-none"
+          >
             <Image
               src="/images/avatar3.png"
               alt="Creative portrait 3"
@@ -62,7 +133,10 @@ export default function Hero() {
           </div>
 
           {/* Avatar 4: Overlaps Bottom Right area of Y */}
-          <div className="absolute bottom-[22%] left-[84%] w-[11.5vw] h-[11.5vw] max-w-[150px] max-h-[150px] min-w-[55px] min-h-[55px] rounded-full overflow-hidden border-[0.3vw] md:border-[5px] border-[#050508] shadow-2xl z-20 select-none">
+          <div
+            ref={(el) => (avatarRefs.current[3] = el)}
+            className="absolute bottom-[22%] left-[84%] w-[11.5vw] h-[11.5vw] max-w-[150px] max-h-[150px] min-w-[55px] min-h-[55px] rounded-full overflow-hidden border-[0.3vw] md:border-[5px] border-[var(--background)] shadow-2xl z-20 select-none"
+          >
             <Image
               src="/images/avatar4.png"
               alt="Creative portrait 4"
@@ -72,8 +146,8 @@ export default function Hero() {
             />
           </div>
 
-          {/* Spinning SVG Text Seal: Overlaps bottom-right area of Y */}
-          <div className="absolute bottom-[-8%] right-[-6%] w-[13.5vw] h-[13.5vw] max-w-[170px] max-h-[170px] min-w-[80px] min-h-[80px] select-none pointer-events-auto z-30">
+          {/* Spinning SVG Text Seal: Overlaps bottom-left area of S/T in the left corner */}
+          <div className="absolute bottom-[-8%] left-[-6%] w-[13.5vw] h-[13.5vw] max-w-[170px] max-h-[170px] min-w-[80px] min-h-[80px] select-none pointer-events-auto z-30">
             <a href="#portfolio" className="relative group flex items-center justify-center h-full w-full">
               {/* Spinning Text */}
               <svg className="absolute inset-0 h-full w-full animate-spin-slow origin-center" viewBox="0 0 100 100">
@@ -107,52 +181,26 @@ export default function Hero() {
           className="w-full flex flex-col items-center justify-center text-center"
         >
           {/* Description text in Inter */}
-
           <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-xl sm:max-w-2xl leading-relaxed mb-8 px-4 font-medium">
             We are a modern creative agency helping brands to transform ideas into impactful digital experiences from strategy to execution.
           </p>
 
           {/* Overlapping Client Avatars stack & 10K+ stats */}
-          <div className="flex flex-row items-center gap-4">
-            {/* Avatars Stack */}
+          <div className="flex flex-row items-center gap-6">
+            {/* Avatars Stack Placeholders for landing target */}
             <div className="flex -space-x-3 select-none">
-              <div className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-full overflow-hidden border-2 border-[#050508] shadow-md">
-                <Image
-                  src="/images/avatar1.png"
-                  alt="Client partner 1"
-                  fill
-                  className="object-cover"
+              {[0, 1, 2, 3].map((idx) => (
+                <div
+                  key={idx}
+                  ref={(el) => (placeholderRefs.current[idx] = el)}
+                  className="h-9 w-9 sm:h-10 sm:w-10 rounded-full border-2 border-transparent bg-transparent opacity-0"
                 />
-              </div>
-              <div className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-full overflow-hidden border-2 border-[#050508] shadow-md">
-                <Image
-                  src="/images/avatar2.png"
-                  alt="Client partner 2"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-full overflow-hidden border-2 border-[#050508] shadow-md">
-                <Image
-                  src="/images/avatar3.png"
-                  alt="Client partner 3"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-full overflow-hidden border-2 border-[#050508] shadow-md">
-                <Image
-                  src="/images/avatar4.png"
-                  alt="Client partner 4"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              ))}
             </div>
 
             {/* Stats description text */}
             <div className="flex flex-col items-start text-left leading-none">
-              <span className="text-xl sm:text-2xl font-bold font-sans text-white tracking-tight">
+              <span className="text-2xl sm:text-3xl font-bold font-sans text-[var(--text-black-custom)] tracking-tight">
                 10K+
               </span>
               <span className="text-[10px] sm:text-xs text-slate-450 mt-1 uppercase font-bold tracking-wide">

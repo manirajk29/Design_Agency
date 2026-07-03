@@ -5,6 +5,29 @@
   --foreground: #94a3b8; /* Slate-400 for neutral text */
   --card: #0b0f19; /* Deep indigo-tinted dark card bg */
   --card-border: rgba(255, 255, 255, 0.05); /* Thin outline border */
+  --stat-card: #121622;
+  --stat-text: #ffffff;
+  --about-bg: #0b0f19;
+  --about-text: #ffffff;
+  --text-black-custom: #ffffff;
+  --collage-bg: #050508;
+  --collage-text: #ffffff;
+  --border-color-custom: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='light'] {
+  --background: #fcfcfc; /* Premium clean off-white */
+  --foreground: #334155; /* Slate-700 */
+  --card: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.06);
+  --stat-card: #f3f4f6; /* slate-100 */
+  --stat-text: #1f2937;
+  --about-bg: #ffffff;
+  --about-text: #1f2937;
+  --text-black-custom: #000000;
+  --collage-bg: #ffffff;
+  --collage-text: #000000;
+  --border-color-custom: rgba(0, 0, 0, 0.06);
 }
 
 @theme {
@@ -54,6 +77,10 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
+}
+
+body, section, header, footer, .glass-card, .bg-card, input, textarea, button, h1, h2, h3, h4, h5, p, span, a {
+  transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out, color 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
 }
 
 /* Custom premium scrollbar */

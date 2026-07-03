@@ -52,7 +52,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-[#050508] border-t border-white/5 pt-20 pb-12 overflow-hidden select-none">
+    <footer className="relative bg-[var(--background)] border-t border-[var(--border-color-custom)] pt-20 pb-12 overflow-hidden select-none">
       
       {/* Light glow at the bottom */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-[150px] rounded-full bg-[#b4fe1e]/[0.01] blur-[80px] pointer-events-none" />

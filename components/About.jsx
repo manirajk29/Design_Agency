@@ -33,7 +33,7 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="relative py-24 sm:py-32 bg-white text-black overflow-hidden select-none">
+    <section id="about" className="relative py-24 sm:py-32 bg-[var(--about-bg)] text-[var(--about-text)] overflow-hidden select-none">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* About Grid */}
@@ -47,7 +47,7 @@ export default function About() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-4"
           >
-            <h2 className="text-[100px] sm:text-[130px] md:text-[150px] lg:text-[170px] xl:text-[180px] font-bold font-bebas leading-[0.8] text-black tracking-normal select-none uppercase">
+            <h2 className="text-[100px] sm:text-[130px] md:text-[150px] lg:text-[170px] xl:text-[180px] font-bold font-bebas leading-[0.8] text-[var(--text-black-custom)] tracking-normal select-none uppercase">
               ABOUT
             </h2>
           </motion.div>
@@ -60,7 +60,7 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-8 flex flex-col justify-center"
           >
-            <p className="text-3xl sm:text-4xl md:text-[42px] font-bold font-bebas leading-[0.98] text-black uppercase max-w-2xl lg:mt-4 tracking-tight select-none">
+            <p className="text-3xl sm:text-4xl md:text-[42px] font-bold font-bebas leading-[0.98] text-[var(--text-black-custom)] uppercase max-w-2xl lg:mt-4 tracking-tight select-none">
               WE’RE A PASSIONATE CREATIVE AGENCY BLENDING DESIGN AND TECHNOLOGY THAT INSPIRE, ENGAGE, AND ELEVATE BRANDS WORLDWIDE.
             </p>
           </motion.div>
@@ -78,12 +78,12 @@ export default function About() {
             <motion.div
               key={stat.label}
               variants={itemVariants}
-              className="bg-[#f4f4f4] p-10 rounded-xl flex flex-col items-center justify-center text-center border border-transparent hover:scale-[1.02] hover:-translate-y-1 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] select-none shadow-sm"
+              className="bg-[var(--stat-card)] p-10 rounded-xl flex flex-col items-center justify-center text-center border border-[var(--border-color-custom)] hover:scale-[1.02] hover:-translate-y-1 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] select-none shadow-sm"
             >
-              <h3 className="text-[55px] sm:text-[65px] md:text-[75px] font-bold font-bebas text-black leading-none mb-3 select-none">
+              <h3 className="text-[55px] sm:text-[65px] md:text-[75px] font-bold font-bebas text-[var(--stat-text)] leading-none mb-3 select-none">
                 {stat.value}
               </h3>
-              <p className="text-xs sm:text-sm font-bold text-neutral-800 font-sans tracking-wide">
+              <p className="text-xs sm:text-sm font-bold text-[var(--foreground)] font-sans tracking-wide">
                 {stat.label}
               </p>
             </motion.div>

@@ -54,7 +54,7 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="relative py-24 sm:py-32 bg-[#050508] overflow-hidden">
+    <section id="services" className="relative py-24 sm:py-32 bg-[var(--background)] overflow-hidden">
       {/* Subtle Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#b4fe1e]/[0.012] blur-[160px] pointer-events-none" />
 

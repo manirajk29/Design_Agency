@@ -85,7 +85,7 @@ export default function Portfolio() {
   return (
     <div id="portfolio">
       {/* 1. CREATIVE PORTFOLIO Collage Transition Banner (Light Mode - Screenshot Alignment) */}
-      <section className="relative py-28 sm:py-36 bg-white flex items-center justify-center overflow-hidden border-b border-[#e5e5e5]">
+      <section className="relative py-28 sm:py-36 bg-[var(--collage-bg)] flex items-center justify-center overflow-hidden border-b border-[var(--border-color-custom)]">
         <div className="max-w-7xl mx-auto px-6 w-full flex items-center justify-center relative">
           
           <motion.div
@@ -98,7 +98,7 @@ export default function Portfolio() {
             {/* Giant Title in Bebas Neue (Text sits in front via relative z-20) */}
             <h2 className="relative z-20 text-[13.5vw] md:text-[14.5vw] font-bold font-bebas leading-[0.8] tracking-tight uppercase select-none pointer-events-none">
               <span className="block text-[#9ca3af] tracking-normal">CREATIVE</span>
-              <span className="block text-black tracking-normal">PORTFOLIO</span>
+              <span className="block text-[var(--collage-text)] tracking-normal">PORTFOLIO</span>
             </h2>
 
             {/* collage1 (woman sideways): top-left of CREATIVE (z-10 to sit behind the z-20 text) */}
@@ -169,7 +169,7 @@ export default function Portfolio() {
       </section>
 
       {/* 2. Portfolio Project Grid (Dark Mode - Visual Alignment) */}
-      <section className="relative py-24 sm:py-32 bg-[#050508] overflow-hidden">
+      <section className="relative py-24 sm:py-32 bg-[var(--background)] overflow-hidden">
         {/* Background glow overlay */}
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-indigo-500/[0.015] blur-[150px] pointer-events-none" />
 
