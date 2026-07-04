@@ -17,50 +17,72 @@ export default function Hero() {
     gsap.registerPlugin(ScrollTrigger);
 
     let ctx = gsap.context(() => {
-      // Create a timeline linked to the scroll trigger
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "+=100%", // Pin and animate over 100% viewport scroll height
-          scrub: 1, // Smooth scrub linked directly to scroll bar
-          pin: true, // Pin the Hero element in the viewport
-          markers: true, // Show scroll markers visually
-          invalidateOnRefresh: true, // Recalculate offsets on resize
-        },
-      });
+      const mm = gsap.matchMedia();
 
-      // Animate each of the 4 absolute header avatars to morph into their bottom row placeholders
-      [0, 1, 2, 3].forEach((idx) => {
-        const avatar = avatarRefs.current[idx];
-        const placeholder = placeholderRefs.current[idx];
-        if (!avatar || !placeholder) return;
-
-        tl.to(
-          avatar,
-          {
-            x: () => {
-              const aRect = avatar.getBoundingClientRect();
-              const pRect = placeholder.getBoundingClientRect();
-              return pRect.left - aRect.left;
-            },
-            y: () => {
-              const aRect = avatar.getBoundingClientRect();
-              const pRect = placeholder.getBoundingClientRect();
-              return pRect.top - aRect.top;
-            },
-            scale: () => {
-              const aRect = avatar.getBoundingClientRect();
-              const pRect = placeholder.getBoundingClientRect();
-              return pRect.width / aRect.width;
-            },
-            borderWidth: "2px",
-            borderColor: "var(--background)",
-            ease: "power1.inOut",
+      // Desktop: Morph avatars to their bottom row placeholders on scroll
+      mm.add("(min-width: 768px)", () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "+=100%", // Pin and animate over 100% viewport scroll height
+            scrub: 1, // Smooth scrub linked directly to scroll bar
+            pin: true, // Pin the Hero element in the viewport
+            invalidateOnRefresh: true, // Recalculate offsets on resize
           },
-          0
-        ); // start all animations simultaneously
+        });
+
+        [0, 1, 2, 3].forEach((idx) => {
+          const avatar = avatarRefs.current[idx];
+          const placeholder = placeholderRefs.current[idx];
+          if (!avatar || !placeholder) return;
+
+          tl.to(
+            avatar,
+            {
+              x: () => {
+                const aRect = avatar.getBoundingClientRect();
+                const pRect = placeholder.getBoundingClientRect();
+                return pRect.left - aRect.left;
+              },
+              y: () => {
+                const aRect = avatar.getBoundingClientRect();
+                const pRect = placeholder.getBoundingClientRect();
+                return pRect.top - aRect.top;
+              },
+              scale: () => {
+                const aRect = avatar.getBoundingClientRect();
+                const pRect = placeholder.getBoundingClientRect();
+                return pRect.width / aRect.width;
+              },
+              borderWidth: "2px",
+              borderColor: "var(--background)",
+              ease: "power1.inOut",
+            },
+            0
+          );
+        });
       });
+
+      // Mobile/Tablet: Disable pinning and morphing, show a simple entry animation
+      mm.add("(max-width: 767px)", () => {
+        [0, 1, 2, 3].forEach((idx) => {
+          const avatar = avatarRefs.current[idx];
+          if (!avatar) return;
+          gsap.fromTo(
+            avatar,
+            { scale: 0.8, opacity: 0 },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.8,
+              delay: 0.15 * idx,
+              ease: "power2.out",
+            }
+          );
+        });
+      });
+
     }, containerRef);
 
     return () => ctx.revert();
@@ -70,7 +92,7 @@ export default function Hero() {
     <section
       ref={containerRef}
       id="home"
-      className="relative h-[100dvh] w-full flex flex-col items-center justify-between pt-24 pb-8 overflow-hidden bg-[var(--background)]"
+      className="relative h-[100dvh] w-full flex flex-col items-center justify-between pt-24 pb-8 overflow-hidden bg-[var(--background)] border-b border-[var(--border-color-custom)]"
     >
       {/* Background glow overlay */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-indigo-500/[0.015] blur-[155px] pointer-events-none" />
@@ -82,18 +104,18 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-fit mx-auto text-center"
+          className="relative w-fit mx-auto text-center z-20"
         >
           {/* Giant Header Title in Bebas Neue */}
           <h1 className="text-[13.5vw] md:text-[14.5vw] font-bold font-bebas leading-[0.8] tracking-tight uppercase select-none">
-            <span className="block text-[#b4fe1e] tracking-normal">CREATIVE</span>
-            <span className="block text-[#d4cfc9] tracking-normal">STRATEGY</span>
+            <span className="block text-[var(--hero-creative-color)] tracking-normal">CREATIVE</span>
+            <span className="block text-[var(--hero-strategy-color)] tracking-normal">STRATEGY</span>
           </h1>
 
-          {/* Avatar 1: Overlaps Left side of C */}
+          {/* Avatar 1: Placed Outside Left side of C */}
           <div
             ref={(el) => (avatarRefs.current[0] = el)}
-            className="absolute top-[6%] left-[-4%] w-[11.5vw] h-[11.5vw] max-w-[150px] max-h-[150px] min-w-[55px] min-h-[55px] rounded-full overflow-hidden border-[0.3vw] md:border-[5px] border-[var(--background)] shadow-2xl z-20 select-none"
+            className="absolute top-[-10%] left-[-15%] w-[14vw] h-[14vw] min-w-[40px] min-h-[40px] max-w-[70px] max-h-[70px] rounded-full overflow-hidden border-[3px] border-[var(--background)] shadow-2xl z-20 select-none md:top-[6%] md:left-[-15%] md:w-[11.5vw] md:h-[11.5vw] md:min-w-[55px] md:min-h-[55px] md:border-[5px]"
           >
             <Image
               src="/images/avatar1.png"
@@ -104,10 +126,10 @@ export default function Hero() {
             />
           </div>
 
-          {/* Avatar 2: Overlaps Top right area of I */}
+          {/* Avatar 2: Placed Outside Top right area */}
           <div
             ref={(el) => (avatarRefs.current[1] = el)}
-            className="absolute top-[6%] left-[67%] w-[11.5vw] h-[11.5vw] max-w-[150px] max-h-[150px] min-w-[55px] min-h-[55px] rounded-full overflow-hidden border-[0.3vw] md:border-[5px] border-[var(--background)] shadow-2xl z-20 select-none"
+            className="absolute top-[-10%] left-[95%] w-[14vw] h-[14vw] min-w-[40px] min-h-[40px] max-w-[70px] max-h-[70px] rounded-full overflow-hidden border-[3px] border-[var(--background)] shadow-2xl z-20 select-none md:top-[6%] md:left-[103%] md:w-[11.5vw] md:h-[11.5vw] md:min-w-[55px] md:min-h-[55px] md:border-[5px]"
           >
             <Image
               src="/images/avatar2.png"
@@ -118,10 +140,10 @@ export default function Hero() {
             />
           </div>
 
-          {/* Avatar 3: Overlaps Bottom Left area of S */}
+          {/* Avatar 3: Placed Outside Bottom Left area */}
           <div
             ref={(el) => (avatarRefs.current[2] = el)}
-            className="absolute bottom-[8%] left-[8%] w-[11.5vw] h-[11.5vw] max-w-[150px] max-h-[150px] min-w-[55px] min-h-[55px] rounded-full overflow-hidden border-[0.3vw] md:border-[5px] border-[var(--background)] shadow-2xl z-20 select-none"
+            className="absolute bottom-[-8%] left-[-10%] w-[14vw] h-[14vw] min-w-[40px] min-h-[40px] max-w-[70px] max-h-[70px] rounded-full overflow-hidden border-[3px] border-[var(--background)] shadow-2xl z-20 select-none md:bottom-[8%] md:left-[-12%] md:w-[11.5vw] md:h-[11.5vw] md:min-w-[55px] md:min-h-[55px] md:border-[5px]"
           >
             <Image
               src="/images/avatar3.png"
@@ -132,10 +154,10 @@ export default function Hero() {
             />
           </div>
 
-          {/* Avatar 4: Overlaps Bottom Right area of Y */}
+          {/* Avatar 4: Placed Outside Bottom Right area */}
           <div
             ref={(el) => (avatarRefs.current[3] = el)}
-            className="absolute bottom-[22%] left-[84%] w-[11.5vw] h-[11.5vw] max-w-[150px] max-h-[150px] min-w-[55px] min-h-[55px] rounded-full overflow-hidden border-[0.3vw] md:border-[5px] border-[var(--background)] shadow-2xl z-20 select-none"
+            className="absolute bottom-[10%] left-[95%] w-[14vw] h-[14vw] min-w-[40px] min-h-[40px] max-w-[70px] max-h-[70px] rounded-full overflow-hidden border-[3px] border-[var(--background)] shadow-2xl z-20 select-none md:bottom-[22%] md:left-[101%] md:w-[11.5vw] md:h-[11.5vw] md:min-w-[55px] md:min-h-[55px] md:border-[5px]"
           >
             <Image
               src="/images/avatar4.png"
@@ -147,7 +169,7 @@ export default function Hero() {
           </div>
 
           {/* Spinning SVG Text Seal: Overlaps bottom-left area of S/T in the left corner */}
-          <div className="absolute bottom-[-8%] left-[-6%] w-[13.5vw] h-[13.5vw] max-w-[170px] max-h-[170px] min-w-[80px] min-h-[80px] select-none pointer-events-auto z-30">
+          <div className="absolute bottom-[-15%] left-[-5%] w-[18vw] h-[18vw] min-w-[65px] min-h-[65px] max-w-[100px] max-h-[100px] select-none pointer-events-auto z-30 md:bottom-[-8%] md:left-[-6%] md:w-[13.5vw] md:h-[13.5vw] md:min-w-[80px] md:min-h-[80px] md:max-w-[170px] md:max-h-[170px]">
             <a href="#portfolio" className="relative group flex items-center justify-center h-full w-full">
               {/* Spinning Text */}
               <svg className="absolute inset-0 h-full w-full animate-spin-slow origin-center" viewBox="0 0 100 100">
@@ -158,15 +180,15 @@ export default function Hero() {
                     fill="transparent"
                   />
                 </defs>
-                <text className="text-[7.5px] fill-[#8a8a8a] font-bold font-sans uppercase tracking-[2px]">
+                <text className="text-[7.5px] fill-[var(--hero-spin-color)] font-bold font-sans uppercase tracking-[2px]">
                   <textPath href="#circlePath">
                     WE CRAFT UNIQUE BRAND IDENTITIES • UNIQUE VALUES •
                   </textPath>
                 </text>
               </svg>
               {/* Center Arrow */}
-              <div className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-colors duration-300">
-                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 transform group-hover:translate-x-0.5 transition-transform duration-300" />
+              <div className="h-7 w-7 sm:h-9 sm:w-9 md:h-14 md:w-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-colors duration-300">
+                <ArrowRight className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5 transform group-hover:translate-x-0.5 transition-transform duration-300" />
               </div>
             </a>
           </div>
@@ -178,7 +200,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full flex flex-col items-center justify-center text-center"
+          className="w-full flex flex-col items-center justify-center text-center font-medium relative z-10"
         >
           {/* Description text in Inter */}
           <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-xl sm:max-w-2xl leading-relaxed mb-8 px-4 font-medium">
@@ -187,14 +209,21 @@ export default function Hero() {
 
           {/* Overlapping Client Avatars stack & 10K+ stats */}
           <div className="flex flex-row items-center gap-6">
-            {/* Avatars Stack Placeholders for landing target */}
+            {/* Avatars Stack Placeholders for landing target on desktop, static images on mobile */}
             <div className="flex -space-x-3 select-none">
               {[0, 1, 2, 3].map((idx) => (
                 <div
                   key={idx}
                   ref={(el) => (placeholderRefs.current[idx] = el)}
-                  className="h-9 w-9 sm:h-10 sm:w-10 rounded-full border-2 border-transparent bg-transparent opacity-0"
-                />
+                  className="h-9 w-9 sm:h-10 sm:w-10 rounded-full border-2 border-[var(--background)] bg-[var(--background)] relative overflow-hidden md:bg-transparent md:border-transparent md:opacity-0"
+                >
+                  <Image
+                    src={`/images/avatar${idx + 1}.png`}
+                    alt={`Client portrait ${idx + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               ))}
             </div>
 

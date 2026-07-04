@@ -33,7 +33,7 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="relative py-24 sm:py-32 bg-[var(--about-bg)] text-[var(--about-text)] overflow-hidden select-none">
+    <section id="about" className="relative py-24 sm:py-32 bg-[var(--about-bg)] text-[var(--about-text)] overflow-hidden select-none border-b border-[var(--border-color-custom)]">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* About Grid */}
