@@ -16,8 +16,31 @@ export default function Hero() {
     // Register ScrollTrigger plugin on the client
     gsap.registerPlugin(ScrollTrigger);
 
+    const refreshHandler = () => {
+      avatarRefs.current.forEach((avatar) => {
+        if (avatar) {
+          gsap.set(avatar, { clearProps: "x,y,scale,borderWidth,borderColor" });
+        }
+      });
+    };
+
+    ScrollTrigger.addEventListener("refreshInit", refreshHandler);
+
     let ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
+
+      // Helper to calculate page-relative offset of an element
+      const getPageOffset = (el) => {
+        let top = 0;
+        let left = 0;
+        let current = el;
+        while (current) {
+          top += current.offsetTop || 0;
+          left += current.offsetLeft || 0;
+          current = current.offsetParent;
+        }
+        return { top, left };
+      };
 
       // Desktop: Morph avatars to their bottom row placeholders on scroll
       mm.add("(min-width: 768px)", () => {
@@ -41,19 +64,17 @@ export default function Hero() {
             avatar,
             {
               x: () => {
-                const aRect = avatar.getBoundingClientRect();
-                const pRect = placeholder.getBoundingClientRect();
-                return pRect.left - aRect.left;
+                const aPos = getPageOffset(avatar);
+                const pPos = getPageOffset(placeholder);
+                return pPos.left - aPos.left;
               },
               y: () => {
-                const aRect = avatar.getBoundingClientRect();
-                const pRect = placeholder.getBoundingClientRect();
-                return pRect.top - aRect.top;
+                const aPos = getPageOffset(avatar);
+                const pPos = getPageOffset(placeholder);
+                return pPos.top - aPos.top;
               },
               scale: () => {
-                const aRect = avatar.getBoundingClientRect();
-                const pRect = placeholder.getBoundingClientRect();
-                return pRect.width / aRect.width;
+                return placeholder.offsetWidth / avatar.offsetWidth;
               },
               borderWidth: "2px",
               borderColor: "var(--background)",
@@ -85,7 +106,10 @@ export default function Hero() {
 
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      ScrollTrigger.removeEventListener("refreshInit", refreshHandler);
+    };
   }, []);
 
   return (
@@ -208,9 +232,9 @@ export default function Hero() {
           </p>
 
           {/* Overlapping Client Avatars stack & 10K+ stats */}
-          <div className="flex flex-row items-center gap-6">
+          <div className="flex flex-row items-start gap-10">
             {/* Avatars Stack Placeholders for landing target on desktop, static images on mobile */}
-            <div className="flex -space-x-3 select-none">
+            <div className="flex -space-x-3 select-none -mt-2">
               {[0, 1, 2, 3].map((idx) => (
                 <div
                   key={idx}

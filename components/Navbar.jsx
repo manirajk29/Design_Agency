@@ -54,13 +54,9 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "py-3 bg-[var(--background)]/85 backdrop-blur-md border-b border-[var(--border-color-custom)] shadow-lg shadow-black/10"
-            : "py-5 bg-transparent"
-        }`}
+        className="absolute top-0 left-0 right-0 z-50 py-5 bg-transparent"
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className="w-full px-6 md:px-12 lg:px-16 flex items-center justify-between">
           {/* Logo (monogram DA image) */}
           <Link href="/#home" className="flex items-center group z-50 select-none">
             <div className="relative h-12 w-12 overflow-hidden rounded-md border border-[var(--border-color-custom)] shadow-md group-hover:scale-105 transition-transform duration-300">
@@ -74,18 +70,6 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-sm font-semibold text-[var(--foreground)] hover:text-[#b4fe1e] transition-colors duration-300 animated-underline"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
 
           {/* Right Section: Theme Toggle + CTA + Mobile Hamburger */}
           <div className="flex items-center gap-3 z-50">
@@ -105,10 +89,10 @@ export default function Navbar() {
             {/* Desktop CTA */}
             <Link
               href="/#contact"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-white text-black hover:bg-slate-200 transition-all duration-300 hover:scale-105 active:scale-95 shadow-md cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-semibold bg-white text-black hover:bg-slate-200 transition-all duration-300 hover:scale-105 active:scale-95 shadow-md cursor-pointer"
             >
               Get Started
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowRight className="h-4 w-4" />
             </Link>
 
             {/* Mobile Hamburger Button */}

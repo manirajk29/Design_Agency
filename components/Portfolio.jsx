@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Filter } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -14,12 +14,11 @@ if (typeof window !== "undefined") {
 import Link from "next/link";
 import { projects } from "@/data/projects";
 
-const categories = ["All", "Design", "Development", "Branding"];
-
 export default function Portfolio() {
-  const [activeCategory, setActiveCategory] = useState("All");
   const triggerRef = useRef(null);
   const containerRef = useRef(null);
+  const horizontalSectionRef = useRef(null);
+  const horizontalTrackRef = useRef(null);
 
   useEffect(() => {
     // Register ScrollTrigger plugin on the client
@@ -91,15 +90,56 @@ export default function Portfolio() {
             borderRadius: 0,
             borderWidth: 0,
             boxShadow: "none",
+            zIndex: 60, // Ensure it covers the z-50 Navbar during expand
             ease: "power2.inOut",
           }, 1);
         }
+
+        // Slide up and fade out the header navigation bar during the zoom
+        tl.to("header", {
+          y: -120,
+          opacity: 0,
+          pointerEvents: "none",
+          duration: 0.4,
+          ease: "power2.inOut",
+        }, 1);
 
         // Fade in the fullscreen overlay text matching the reference image layout
         tl.to(".portfolio-fullscreen-overlay", {
           opacity: 1,
           ease: "power2.inOut",
         }, 1.15);
+
+        // Draw horizontal reveal line
+        tl.to(".portfolio-line", {
+          scaleX: 1,
+          duration: 0.6,
+          ease: "power3.inOut",
+        }, 1.25);
+
+        // Expand text from the line
+        tl.to(".portfolio-title", {
+          opacity: 1,
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 0.8,
+          ease: "power2.out",
+        }, 1.55);
+
+        // Fade out/retract the line slightly
+        tl.to(".portfolio-line", {
+          opacity: 0,
+          scaleX: 0.8,
+          duration: 0.4,
+          ease: "power2.in",
+        }, 1.95);
+
+        // Fade in the subtitle text
+        tl.to(".portfolio-desc", {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        }, 1.75);
       });
 
       // Mobile/Tablet: Disable pinning/scaling. Let images load naturally.
@@ -138,10 +178,37 @@ export default function Portfolio() {
     };
   }, []);
 
-  const filteredProjects = projects.filter((project) => {
-    if (activeCategory.toLowerCase() === "all") return true;
-    return project.category.toLowerCase() === activeCategory.toLowerCase();
-  });
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    let ctx = gsap.context(() => {
+      const track = horizontalTrackRef.current;
+      const section = horizontalSectionRef.current;
+      if (!track || !section) return;
+
+      const getScrollAmount = () => {
+        return -(track.scrollWidth - window.innerWidth);
+      };
+
+      gsap.fromTo(track,
+        { x: 0 },
+        {
+          x: getScrollAmount,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            pin: true,
+            scrub: 1.2,
+            start: "top top",
+            end: () => `+=${Math.abs(getScrollAmount())}`,
+            invalidateOnRefresh: true,
+          }
+        }
+      );
+    }, horizontalSectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -250,16 +317,33 @@ export default function Portfolio() {
           </div>
 
           {/* Desktop Fullscreen Overlay (Fades in on Desktop scroll) */}
-          <div className="portfolio-fullscreen-overlay absolute inset-0 hidden lg:flex flex-col items-center justify-center z-40 opacity-0 pointer-events-none bg-black/35">
-            <div className="flex flex-col items-center justify-center text-center px-6 w-full max-w-7xl mx-auto">
-              <h2 className="text-white font-bold leading-[0.8] tracking-[0.1px] uppercase font-bebas text-[9vw] select-none text-center">
-                <span className="block">CREATIVITY</span>
-                <span className="block">TECHNOLOGY</span>
-                <span className="block">AND</span>
-                <span className="block">STRATEGY</span>
-              </h2>
+          <div className="portfolio-fullscreen-overlay absolute inset-0 hidden lg:flex flex-col items-center justify-center z-[60] opacity-0 pointer-events-none bg-black/35">
+            <div className="flex flex-col items-center justify-center text-center px-6 w-full max-w-7xl mx-auto relative">
+              <div className="relative w-full flex flex-col items-center justify-center py-8">
+                {/* Horizontal Line for text reveal */}
+                <div 
+                  className="portfolio-line w-full max-w-2xl h-[2px] bg-[#b4fe1e] absolute z-20"
+                  style={{ transform: "scaleX(0)" }}
+                />
+                
+                <h2 
+                  className="portfolio-title text-white font-bold leading-[0.8] tracking-[0.1px] uppercase font-bebas text-[9vw] select-none text-center z-10"
+                  style={{
+                    clipPath: "inset(50% 0% 50% 0%)",
+                    opacity: 0
+                  }}
+                >
+                  <span className="block">CREATIVITY</span>
+                  <span className="block">TECHNOLOGY</span>
+                  <span className="block">AND</span>
+                  <span className="block">STRATEGY</span>
+                </h2>
+              </div>
 
-              <p className="text-[#e2e8f0]/90 text-sm md:text-base max-w-lg sm:max-w-xl md:max-w-2xl leading-relaxed mt-8 sm:mt-12 md:mt-14 px-4 font-sans font-medium text-center">
+              <p 
+                className="portfolio-desc text-[#e2e8f0]/90 text-sm md:text-base max-w-lg sm:max-w-xl md:max-w-2xl leading-relaxed mt-4 px-4 font-sans font-medium text-center"
+                style={{ opacity: 0, transform: "translateY(20px)" }}
+              >
                 We are a modern creative agency helping brands to transform ideas
                 into impactful digital experiences from strategy to execution.
               </p>
@@ -282,109 +366,88 @@ export default function Portfolio() {
         </div>
       </div>
 
-      {/* 2. Portfolio Project Grid (Dark Mode - Visual Alignment) */}
-      <section id="portfolio-grid" className="relative py-24 sm:py-32 bg-[var(--background)] overflow-hidden border-b border-[var(--border-color-custom)]">
+      {/* 2. Portfolio Project Horizontal Scroll (Dark Mode - Visual Alignment) */}
+      <section 
+        ref={horizontalSectionRef} 
+        id="portfolio-grid" 
+        className="relative h-screen bg-[var(--background)] overflow-hidden border-b border-[var(--border-color-custom)] flex flex-col justify-center py-10"
+      >
         {/* Background glow overlay */}
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-indigo-500/[0.015] blur-[150px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          
-          {/* Header Controls */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 pb-6 border-b border-[var(--border-color-custom)]">
-            <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--card)] border border-[var(--card-border)] mb-4">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]">
-                  Featured Projects
-                </span>
-              </div>
-              <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--text-black-custom)] leading-tight">
-                Where Strategy Meets Beautiful Design
-              </h3>
-            </div>
- 
-            {/* Filters */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[var(--foreground)] mr-1.5 hidden sm:flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider">
-                <Filter className="h-3 w-3" /> Filter:
+        <div className="w-full px-6 md:px-12 lg:px-16 relative z-10 mb-8 md:mb-12">
+          <div className="max-w-xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--card)] border border-[var(--card-border)] mb-4">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]">
+                Featured Projects
               </span>
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 ease-in-out cursor-pointer border ${
-                    activeCategory.toLowerCase() === category.toLowerCase()
-                      ? "bg-[#b4fe1e] border-[#b4fe1e] text-black shadow-sm"
-                      : "bg-[var(--card)] border-[var(--card-border)] text-[var(--foreground)] hover:bg-[#b4fe1e]/10 hover:border-[#b4fe1e]/20 hover:text-[#b4fe1e]"
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
             </div>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--text-black-custom)] leading-tight">
+              Where Strategy Meets Beautiful Design
+            </h3>
           </div>
+        </div>
  
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project, idx) => (
-                <motion.div
-                  id={project.id}
-                  layout
-                  initial={{ opacity: 0, y: 35 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: 15 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{
-                    duration: 0.6,
-                    ease: [0.16, 1, 0.3, 1],
-                    layout: { duration: 0.5, ease: "easeInOut" }
-                  }}
-                  key={project.title}
-                  className="group relative rounded-2xl overflow-hidden bg-[var(--card)] aspect-[4/3] border border-[var(--card-border)] hover:border-[#b4fe1e]/20 hover:shadow-2xl hover:shadow-[#b4fe1e]/5 flex flex-col justify-end scroll-mt-24"
-                >
-                  {/* Image Zoom */}
-                  <div className="absolute inset-0 z-0 overflow-hidden transition-transform duration-500 ease-in-out group-hover:scale-105">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover opacity-85 group-hover:opacity-55 transition-opacity duration-500 ease-in-out"
-                      priority={idx < 3}
-                    />
-                  </div>
+        {/* Horizontal Scroll Track */}
+        <div className="relative w-full z-10 overflow-hidden">
+          <div 
+            ref={horizontalTrackRef} 
+            className="flex flex-row gap-8 md:gap-12 pl-[15vw] md:pl-[25vw] lg:pl-[35vw] pr-6 md:pr-12 lg:pr-16 w-max"
+          >
+            {projects.map((project, idx) => (
+              <motion.div
+                id={project.id}
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
+                key={project.title}
+                className="group relative rounded-2xl overflow-hidden bg-[var(--card)] w-[75vw] sm:w-[50vw] lg:w-[35vw] h-[40vh] sm:h-[45vh] lg:h-[50vh] border border-[var(--card-border)] hover:border-[#b4fe1e]/20 hover:shadow-2xl hover:shadow-[#b4fe1e]/5 flex flex-col justify-end flex-shrink-0 scroll-mt-24"
+              >
+                {/* Image Zoom */}
+                <div className="absolute inset-0 z-0 overflow-hidden transition-transform duration-500 ease-in-out group-hover:scale-105">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 75vw, (max-width: 1200px) 50vw, 35vw"
+                    className="object-cover opacity-85 group-hover:opacity-55 transition-opacity duration-500 ease-in-out"
+                    priority={idx < 3}
+                  />
+                </div>
 
-                  {/* Dark Vignette Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent z-10 transition-opacity duration-500 ease-in-out group-hover:from-black/98 group-hover:via-black/60" />
+                {/* Dark Vignette Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent z-10 transition-opacity duration-500 ease-in-out group-hover:from-black/98 group-hover:via-black/60" />
 
-                  {/* Content Overlay */}
-                  <div className="relative z-20 p-6 sm:p-8 flex flex-col items-start translate-y-5 group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                    <span className="px-2.5 py-1 rounded-md bg-white/5 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider text-slate-350 mb-3 border border-white/5">
-                      {project.category}
-                    </span>
+                {/* Content Overlay */}
+                <div className="relative z-20 p-6 sm:p-8 flex flex-col items-start translate-y-5 group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                  <span className="px-2.5 py-1 rounded-md bg-white/5 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider text-slate-350 mb-3 border border-white/5">
+                    {project.category}
+                  </span>
 
-                    <h4 className="text-xl font-bold text-white mb-2 transition-colors duration-300">
-                      {project.title}
-                    </h4>
+                  <h4 className="text-xl font-bold text-white mb-2 transition-colors duration-300">
+                    {project.title}
+                  </h4>
 
-                    {/* Descriptions */}
-                    <p className="text-slate-400 text-xs sm:text-sm line-clamp-2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out delay-75 font-medium">
-                      {project.description}
-                    </p>
+                  {/* Descriptions */}
+                  <p className="text-slate-400 text-xs sm:text-sm line-clamp-2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out delay-75 font-medium">
+                    {project.description}
+                  </p>
 
-                    <Link
-                      href={project.link}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-450 hover:text-[#b4fe1e] transition-all duration-300"
-                    >
-                      View Project
-                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </Link>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
+                  <Link
+                    href={project.link}
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-slate-450 hover:text-[#b4fe1e] transition-all duration-300"
+                  >
+                    View Project
+                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
           </div>
-
         </div>
       </section>
     </div>

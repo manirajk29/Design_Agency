@@ -124,7 +124,7 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 w-full"
           >
-            <div className="relative rounded-3xl bg-[#0b0f19]/35 p-8 sm:p-10 border border-white/5 overflow-hidden">
+            <div className="relative rounded-3xl bg-[var(--card)]/35 p-8 sm:p-10 border border-white/5 overflow-hidden">
               <AnimatePresence mode="wait">
                 {!isSuccess ? (
                   <motion.form
