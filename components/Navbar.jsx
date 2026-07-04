@@ -76,13 +76,13 @@ export default function Navbar() {
             {/* Light/Dark Toggle switch */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full border border-[var(--border-color-custom)] bg-white/5 hover:bg-white/10 dark:hover:bg-neutral-800 text-slate-400 hover:text-[#b4fe1e] hover:border-[#b4fe1e]/30 transition-all duration-300 cursor-pointer shadow-md select-none"
+              className="p-2 rounded-full border border-[var(--border-color-custom)] bg-white/5 hover:bg-white/10 dark:hover:bg-neutral-800 text-slate-400 hover:text-[#9b87f5] hover:border-[#9b87f5]/30 transition-all duration-300 cursor-pointer shadow-md select-none"
               aria-label="Toggle Theme"
             >
               {theme === "dark" ? (
                 <Sun className="h-4.5 w-4.5" />
               ) : (
-                <Moon className="h-4.5 w-4.5 text-slate-700 hover:text-[#b4fe1e]" />
+                <Moon className="h-4.5 w-4.5 text-slate-700 hover:text-[#9b87f5]" />
               )}
             </button>
 
@@ -98,7 +98,7 @@ export default function Navbar() {
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-full border border-[var(--border-color-custom)] bg-white/5 hover:bg-white/10 dark:hover:bg-neutral-800 text-slate-400 hover:text-[#b4fe1e] transition-all duration-300 md:hidden cursor-pointer shadow-md select-none"
+              className="p-2 rounded-full border border-[var(--border-color-custom)] bg-white/5 hover:bg-white/10 dark:hover:bg-neutral-800 text-slate-400 hover:text-[#9b87f5] transition-all duration-300 md:hidden cursor-pointer shadow-md select-none"
               aria-label="Toggle Menu"
             >
               {isOpen ? <X className="h-4.5 w-4.5" /> : <Menu className="h-4.5 w-4.5" />}
@@ -125,7 +125,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.05, duration: 0.5 }}
                     onClick={() => setIsOpen(false)}
-                    className="text-3xl font-bold font-bebas text-white hover:text-[#b4fe1e] tracking-wider uppercase transition-colors duration-300"
+                    className="text-3xl font-bold font-bebas text-white hover:text-[#9b87f5] tracking-wider uppercase transition-colors duration-300"
                   >
                     {link.name}
                   </motion.a>
@@ -137,7 +137,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: navLinks.length * 0.05, duration: 0.5 }}
                   onClick={() => setIsOpen(false)}
-                  className="mt-4 inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold bg-[#b4fe1e] text-black hover:bg-[#bef264] transition-all duration-300 shadow-md shadow-[#b4fe1e]/15 cursor-pointer"
+                  className="mt-4 inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold bg-[#9b87f5] text-black hover:bg-[#a78bfa] transition-all duration-300 shadow-md shadow-[#9b87f5]/15 cursor-pointer"
                 >
                   Get Started
                   <ArrowRight className="h-4 w-4" />

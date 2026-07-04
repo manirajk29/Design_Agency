@@ -322,7 +322,7 @@ export default function Portfolio() {
               <div className="relative w-full flex flex-col items-center justify-center py-8">
                 {/* Horizontal Line for text reveal */}
                 <div 
-                  className="portfolio-line w-full max-w-2xl h-[2px] bg-[#b4fe1e] absolute z-20"
+                  className="portfolio-line w-full max-w-2xl h-[2px] bg-[#9b87f5] absolute z-20"
                   style={{ transform: "scaleX(0)" }}
                 />
                 
@@ -405,7 +405,7 @@ export default function Portfolio() {
                   ease: [0.16, 1, 0.3, 1]
                 }}
                 key={project.title}
-                className="group relative rounded-2xl overflow-hidden bg-[var(--card)] w-[75vw] sm:w-[50vw] lg:w-[35vw] h-[40vh] sm:h-[45vh] lg:h-[50vh] border border-[var(--card-border)] hover:border-[#b4fe1e]/20 hover:shadow-2xl hover:shadow-[#b4fe1e]/5 flex flex-col justify-end flex-shrink-0 scroll-mt-24"
+                className="group relative rounded-2xl overflow-hidden bg-[var(--card)] w-[75vw] sm:w-[50vw] lg:w-[35vw] h-[40vh] sm:h-[45vh] lg:h-[50vh] border border-[var(--card-border)] hover:border-[#9b87f5]/20 hover:shadow-2xl hover:shadow-[#9b87f5]/5 flex flex-col justify-end flex-shrink-0 scroll-mt-24"
               >
                 {/* Image Zoom */}
                 <div className="absolute inset-0 z-0 overflow-hidden transition-transform duration-500 ease-in-out group-hover:scale-105">
@@ -439,7 +439,7 @@ export default function Portfolio() {
 
                   <Link
                     href={project.link}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-slate-450 hover:text-[#b4fe1e] transition-all duration-300"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-slate-450 hover:text-[#9b87f5] transition-all duration-300"
                   >
                     View Project
                     <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

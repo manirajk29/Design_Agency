@@ -13,10 +13,10 @@
   --collage-bg: #050508;
   --collage-text: #ffffff;
   --border-color-custom: rgba(255, 255, 255, 0.05);
-  --hero-creative-color: #b4fe1e;
+  --hero-creative-color: #9b87f5;
   --hero-strategy-color: #d4cfc9;
   --hero-spin-color: #8a8a8a;
-  --portfolio-creativity-color: #b4fe1e;
+  --portfolio-creativity-color: #9b87f5;
 }
 
 [data-theme='light'] {
@@ -32,7 +32,7 @@
   --collage-bg: #ffffff;
   --collage-text: #000000;
   --border-color-custom: rgba(0, 0, 0, 0.06);
-  --hero-creative-color: #b4fe1e;
+  --hero-creative-color: #9b87f5;
   --hero-strategy-color: #000000;
   --hero-spin-color: #000000;
   --portfolio-creativity-color: #000000;
@@ -139,9 +139,9 @@ body, section, header, footer, .glass-card, .bg-card, input, textarea, button, h
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .glow-card-hover:hover {
-  border-color: rgba(180, 254, 30, 0.25); /* Subtle lime-green border glow */
-  box-shadow: 0 15px 30px -10px rgba(180, 254, 30, 0.15), 
-              0 0 20px -5px rgba(180, 254, 30, 0.03);
+  border-color: rgba(155, 135, 245, 0.25); /* Subtle lime-green border glow */
+  box-shadow: 0 15px 30px -10px rgba(155, 135, 245, 0.15), 
+              0 0 20px -5px rgba(155, 135, 245, 0.03);
 }
 
 html {

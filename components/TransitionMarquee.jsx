@@ -21,7 +21,7 @@ const StarGroup = () => (
     {/* Small Star */}
     <svg
       viewBox="0 0 100 100"
-      className="absolute top-[10%] left-[10%] w-[35%] h-[35%] text-[#b4fe1e] fill-current drop-shadow-[0_2px_3px_rgba(0,0,0,0.2)]"
+      className="absolute top-[10%] left-[10%] w-[35%] h-[35%] text-[#9b87f5] fill-current drop-shadow-[0_2px_3px_rgba(0,0,0,0.2)]"
     >
       <path d="M 50 10 L 53 40 L 78 22 L 60 48 L 90 50 L 60 52 L 78 78 L 53 60 L 50 90 L 47 60 L 22 78 L 40 52 L 10 50 L 40 48 L 22 22 L 47 40 Z" />
     </svg>
@@ -91,10 +91,10 @@ export default function TransitionMarquee() {
         WORKS
       </span>
       <div className="flex flex-col justify-center items-start leading-[0.85] text-left mx-6 md:mx-12 select-none">
-        <span className="text-[#b4fe1e] font-sans text-lg md:text-3xl font-extrabold italic tracking-tight uppercase">
+        <span className="text-[#9b87f5] font-sans text-lg md:text-3xl font-extrabold italic tracking-tight uppercase">
           Creative
         </span>
-        <span className="text-[#b4fe1e] font-sans text-lg md:text-3xl font-extrabold italic tracking-tight uppercase">
+        <span className="text-[#9b87f5] font-sans text-lg md:text-3xl font-extrabold italic tracking-tight uppercase">
           projects
         </span>
       </div>

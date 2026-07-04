@@ -48,7 +48,7 @@ export default function ProjectPage({ params }) {
           <div className="mb-8">
             <Link
               href={`/#${project.id}`}
-              className="group inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--border-color-custom)] bg-white/5 hover:bg-[#b4fe1e]/15 hover:border-[#b4fe1e]/30 text-slate-400 hover:text-[#b4fe1e] transition-all duration-300 cursor-pointer shadow-md select-none"
+              className="group inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--border-color-custom)] bg-white/5 hover:bg-[#9b87f5]/15 hover:border-[#9b87f5]/30 text-slate-400 hover:text-[#9b87f5] transition-all duration-300 cursor-pointer shadow-md select-none"
             >
               <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
               <span className="text-xs font-bold uppercase tracking-wider">Back to Portfolio</span>
@@ -80,7 +80,7 @@ export default function ProjectPage({ params }) {
             <div className="lg:col-span-5 flex flex-col justify-start">
               {/* Category */}
               <div className="mb-4">
-                <span className="px-3 py-1 rounded-full bg-[#b4fe1e]/10 border border-[#b4fe1e]/20 text-xs font-bold uppercase tracking-widest text-[#b4fe1e]">
+                <span className="px-3 py-1 rounded-full bg-[#9b87f5]/10 border border-[#9b87f5]/20 text-xs font-bold uppercase tracking-widest text-[#9b87f5]">
                   {project.category}
                 </span>
               </div>
@@ -120,10 +120,10 @@ export default function ProjectPage({ params }) {
                   className="w-full flex items-center justify-between p-5 bg-white/2 hover:bg-white/5 transition-colors cursor-pointer select-none text-left"
                 >
                   <div className="flex items-center gap-2">
-                    <BarChart3 className="h-4.5 w-4.5 text-[#b4fe1e]" />
+                    <BarChart3 className="h-4.5 w-4.5 text-[#9b87f5]" />
                     <span className="text-sm font-bold uppercase tracking-wider text-white">Project Case Study</span>
                   </div>
-                  {showSpecs ? <ChevronUp className="h-4 w-4 text-[#b4fe1e]" /> : <ChevronDown className="h-4 w-4 text-slate-400" />}
+                  {showSpecs ? <ChevronUp className="h-4 w-4 text-[#9b87f5]" /> : <ChevronDown className="h-4 w-4 text-slate-400" />}
                 </button>
 
                 <AnimatePresence initial={false}>
@@ -137,11 +137,11 @@ export default function ProjectPage({ params }) {
                     >
                       <div className="p-5 flex flex-col gap-6 text-sm">
                         <div>
-                          <h4 className="font-bold text-[#b4fe1e] mb-1.5 uppercase tracking-wide text-xs">The Challenge</h4>
+                          <h4 className="font-bold text-[#9b87f5] mb-1.5 uppercase tracking-wide text-xs">The Challenge</h4>
                           <p className="text-slate-350 leading-relaxed font-medium">{project.details.challenge}</p>
                         </div>
                         <div>
-                          <h4 className="font-bold text-[#b4fe1e] mb-1.5 uppercase tracking-wide text-xs">Our Solution</h4>
+                          <h4 className="font-bold text-[#9b87f5] mb-1.5 uppercase tracking-wide text-xs">Our Solution</h4>
                           <p className="text-slate-350 leading-relaxed font-medium">{project.details.solution}</p>
                         </div>
 
@@ -151,7 +151,7 @@ export default function ProjectPage({ params }) {
                           <div className="grid grid-cols-3 gap-3">
                             {project.details.stats.map((stat, sIdx) => (
                               <div key={sIdx} className="p-3 rounded-xl bg-white/2 border border-white/5 text-center">
-                                <span className="block text-lg font-black text-[#b4fe1e]">{stat.value}</span>
+                                <span className="block text-lg font-black text-[#9b87f5]">{stat.value}</span>
                                 <span className="text-[10px] text-slate-500 font-bold leading-tight block mt-1">{stat.label}</span>
                               </div>
                             ))}

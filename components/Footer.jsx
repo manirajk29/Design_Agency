@@ -55,7 +55,7 @@ export default function Footer() {
     <footer className="relative bg-[var(--background)] border-t border-[var(--border-color-custom)] pt-20 pb-12 overflow-hidden select-none">
       
       {/* Light glow at the bottom */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-[150px] rounded-full bg-[#b4fe1e]/[0.01] blur-[80px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-[150px] rounded-full bg-[#9b87f5]/[0.01] blur-[80px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -64,8 +64,8 @@ export default function Footer() {
           
           {/* Column 1: Ready heading and socials */}
           <div className="md:col-span-6 flex flex-col gap-6">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight uppercase max-w-md tracking-tight">
-              Ready to become our <span className="bg-gradient-to-r from-[#b4fe1e] to-emerald-400 bg-clip-text text-transparent">next success story?</span>
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--text-black-custom)] leading-tight uppercase max-w-md tracking-tight">
+              Ready to become our <span className="bg-gradient-to-r from-[#9b87f5] to-purple-400 bg-clip-text text-transparent">next success story?</span>
             </h3>
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm font-medium">
               Let’s create measurable growth, stronger brand presence, and real business impact with a strategy tailored to your goals.
@@ -81,7 +81,7 @@ export default function Footer() {
                       key={item.name}
                       href={item.href}
                       aria-label={`Visit our ${item.name}`}
-                      className="h-10 w-10 rounded-full bg-white/5 border border-white/5 hover:border-[#b4fe1e]/30 hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-[#b4fe1e] transition-all duration-300 cursor-pointer"
+                      className="h-10 w-10 rounded-full bg-[var(--card)] border border-[var(--border-color-custom)] hover:border-[#9b87f5]/30 hover:bg-[var(--card)] shadow-sm flex items-center justify-center text-slate-400 hover:text-[#9b87f5] transition-all duration-300 cursor-pointer"
                     >
                       <IconComponent />
                     </a>
@@ -99,7 +99,7 @@ export default function Footer() {
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="text-sm font-semibold text-slate-400 hover:text-white transition-colors duration-200"
+                    className="text-sm font-semibold text-slate-400 hover:text-[var(--text-black-custom)] transition-colors duration-200"
                   >
                     {item.name}
                   </a>
@@ -112,14 +112,14 @@ export default function Footer() {
           <div className="md:col-span-3 flex flex-col gap-4">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">Location</h4>
             <p className="text-sm font-semibold text-slate-400 leading-relaxed max-w-xs">
-              123 Riverbend,<br />
-              California 94025, USA
+              Chennai,<br />
+              India
             </p>
           </div>
         </div>
 
         {/* Bottom copyright & Scroll to top */}
-        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-[var(--border-color-custom)] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-500 text-center sm:text-left font-medium">
             &copy; {new Date().getFullYear()} PixelCraft Studio. All rights reserved.
           </p>
@@ -135,7 +135,7 @@ export default function Footer() {
             <button
               onClick={scrollToTop}
               aria-label="Scroll to top"
-              className="h-8 w-8 rounded-full bg-white/5 border border-white/5 hover:border-[#b4fe1e]/35 flex items-center justify-center text-slate-400 hover:text-[#b4fe1e] cursor-pointer hover:bg-white/10 transition-all duration-300"
+              className="h-8 w-8 rounded-full bg-[var(--card)] border border-[var(--border-color-custom)] hover:border-[#9b87f5]/35 flex items-center justify-center text-slate-400 hover:text-[#9b87f5] cursor-pointer hover:bg-[var(--card)] shadow-sm transition-all duration-300"
             >
               <ArrowUp className="h-4 w-4" />
             </button>

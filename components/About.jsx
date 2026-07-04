@@ -72,15 +72,15 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6"
         >
           {stats.map((stat) => (
             <motion.div
               key={stat.label}
               variants={itemVariants}
-              className="bg-[var(--stat-card)] p-10 rounded-xl flex flex-col items-center justify-center text-center border border-[var(--border-color-custom)] hover:scale-[1.02] hover:-translate-y-1 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] select-none shadow-sm"
+              className="bg-[var(--stat-card)] p-5 sm:p-10 rounded-xl flex flex-col items-center justify-center text-center border border-[var(--border-color-custom)] hover:scale-[1.02] hover:-translate-y-1 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] select-none shadow-sm"
             >
-              <h3 className="text-[55px] sm:text-[65px] md:text-[75px] font-bold font-bebas text-[var(--stat-text)] leading-none mb-3 select-none">
+              <h3 className="text-[40px] sm:text-[65px] md:text-[75px] font-bold font-bebas text-[var(--stat-text)] leading-none mb-1 sm:mb-3 select-none">
                 {stat.value}
               </h3>
               <p className="text-xs sm:text-sm font-bold text-[var(--foreground)] font-sans tracking-wide">

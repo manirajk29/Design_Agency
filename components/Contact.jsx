@@ -57,7 +57,7 @@ export default function Contact() {
   return (
     <section id="contact" className="relative py-24 sm:py-32 bg-[var(--background)] overflow-hidden border-b border-[var(--border-color-custom)]">
       {/* Background Decorative Blob */}
-      <div className="absolute top-1/2 left-1/4 w-[450px] h-[450px] rounded-full bg-[#b4fe1e]/[0.008] blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 w-[450px] h-[450px] rounded-full bg-[#9b87f5]/[0.008] blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
@@ -70,12 +70,12 @@ export default function Contact() {
             className="lg:col-span-5 flex flex-col justify-between h-full"
           >
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--card)] border border-[var(--border-color-custom)] mb-6">
                 <span className="text-xs font-semibold uppercase tracking-wider text-slate-350">
                   Get In Touch
                 </span>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6 leading-[1.1]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--text-black-custom)] mb-6 leading-[1.1]">
                 Let’s Build Something Iconic Together
               </h2>
               <p className="text-slate-400 text-base leading-relaxed mb-10 max-w-md font-medium">
@@ -85,32 +85,32 @@ export default function Contact() {
 
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300">
+                <div className="h-12 w-12 rounded-xl bg-[var(--card)] border border-[var(--border-color-custom)] flex items-center justify-center text-slate-300">
                   <Mail className="h-5 w-5" />
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500">Email Us</h4>
-                  <p className="text-white text-sm font-semibold mt-0.5">hello@designagency.com</p>
+                  <p className="text-[var(--text-black-custom)] text-sm font-semibold mt-0.5">manirajk29@github.com</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300">
+                <div className="h-12 w-12 rounded-xl bg-[var(--card)] border border-[var(--border-color-custom)] flex items-center justify-center text-slate-300">
                   <Phone className="h-5 w-5" />
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500">Call Us</h4>
-                  <p className="text-white text-sm font-semibold mt-0.5">+1 (555) 123-4567</p>
+                  <p className="text-[var(--text-black-custom)] text-sm font-semibold mt-0.5">9000001010</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300">
+                <div className="h-12 w-12 rounded-xl bg-[var(--card)] border border-[var(--border-color-custom)] flex items-center justify-center text-slate-300">
                   <MapPin className="h-5 w-5" />
                 </div>
                 <div>
                   <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500">Office</h4>
-                  <p className="text-white text-sm font-semibold mt-0.5">Downtown Creative District, NY</p>
+                  <p className="text-[var(--text-black-custom)] text-sm font-semibold mt-0.5">Chennai, India</p>
                 </div>
               </div>
             </div>
@@ -124,7 +124,7 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 w-full"
           >
-            <div className="relative rounded-3xl bg-[var(--card)]/35 p-8 sm:p-10 border border-white/5 overflow-hidden">
+            <div className="relative rounded-3xl bg-[var(--card)]/35 p-8 sm:p-10 border border-[var(--border-color-custom)] overflow-hidden">
               <AnimatePresence mode="wait">
                 {!isSuccess ? (
                   <motion.form
@@ -146,10 +146,10 @@ export default function Contact() {
                         placeholder="Your full name"
                         value={form.name}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3.5 rounded-xl bg-white/5 border text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 hover:border-white/15 focus:bg-white/10 ${
+                        className={`w-full px-4 py-3.5 rounded-xl bg-[var(--card)] border text-sm text-[var(--text-black-custom)] placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all duration-300 hover:border-white/15 focus:bg-[var(--card)] shadow-sm ${
                           errors.name
                             ? "border-red-500/50 focus:border-red-500"
-                            : "border-white/10 focus:border-[#b4fe1e]/50"
+                            : "border-[var(--border-color-custom)] focus:border-[#9b87f5]/50"
                         }`}
                       />
                       {errors.name && (
@@ -172,10 +172,10 @@ export default function Contact() {
                         placeholder="you@example.com"
                         value={form.email}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3.5 rounded-xl bg-white/5 border text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 hover:border-white/15 focus:bg-white/10 ${
+                        className={`w-full px-4 py-3.5 rounded-xl bg-[var(--card)] border text-sm text-[var(--text-black-custom)] placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all duration-300 hover:border-white/15 focus:bg-[var(--card)] shadow-sm ${
                           errors.email
                             ? "border-red-500/50 focus:border-red-500"
-                            : "border-white/10 focus:border-[#b4fe1e]/50"
+                            : "border-[var(--border-color-custom)] focus:border-[#9b87f5]/50"
                         }`}
                       />
                       {errors.email && (
@@ -198,10 +198,10 @@ export default function Contact() {
                         placeholder="Tell us about your project or vision..."
                         value={form.message}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3.5 rounded-xl bg-white/5 border text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 resize-none hover:border-white/15 focus:bg-white/10 ${
+                        className={`w-full px-4 py-3.5 rounded-xl bg-[var(--card)] border text-sm text-[var(--text-black-custom)] placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-all duration-300 resize-none hover:border-white/15 focus:bg-[var(--card)] shadow-sm ${
                           errors.message
                             ? "border-red-500/50 focus:border-red-500"
-                            : "border-white/10 focus:border-[#b4fe1e]/50"
+                            : "border-[var(--border-color-custom)] focus:border-[#9b87f5]/50"
                         }`}
                       />
                       {errors.message && (
@@ -216,7 +216,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full flex items-center justify-center gap-2 py-4 rounded-full bg-[#b4fe1e] text-black font-bold text-sm hover:bg-[#bef264] transition-all duration-300 hover:scale-105 active:scale-98 shadow-md hover:shadow-[#b4fe1e]/15 cursor-pointer disabled:opacity-50 select-none"
+                      className="w-full flex items-center justify-center gap-2 py-4 rounded-full bg-[#9b87f5] text-black font-bold text-sm hover:bg-[#a78bfa] transition-all duration-300 hover:scale-105 active:scale-98 shadow-md hover:shadow-[#9b87f5]/15 cursor-pointer disabled:opacity-50 select-none"
                     >
                       {isSubmitting ? (
                         <span className="h-5 w-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
@@ -235,16 +235,16 @@ export default function Contact() {
                     transition={{ type: "spring", stiffness: 100 }}
                     className="flex flex-col items-center justify-center text-center py-12"
                   >
-                    <div className="h-16 w-16 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-450 mb-6 animate-bounce">
+                    <div className="h-16 w-16 rounded-full bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-6 animate-bounce">
                       <CheckCircle className="h-8 w-8" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-3">Message Received!</h3>
+                    <h3 className="text-2xl font-bold text-[var(--text-black-custom)] mb-3">Message Received!</h3>
                     <p className="text-slate-400 text-sm max-w-sm leading-relaxed mb-8 font-medium">
                       Thank you for reaching out. We have received your inquiry and our team will get back to you shortly.
                     </p>
                     <button
                       onClick={() => setIsSuccess(false)}
-                      className="px-6 py-2.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-bold text-white transition-colors cursor-pointer"
+                      className="px-6 py-2.5 rounded-full border border-[var(--border-color-custom)] bg-[var(--card)] hover:bg-[var(--card)] shadow-sm text-xs font-bold text-[var(--text-black-custom)] transition-colors cursor-pointer"
                     >
                       Send another message
                     </button>

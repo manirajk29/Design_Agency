@@ -139,7 +139,7 @@ export default function Hero() {
           {/* Avatar 1: Placed Outside Left side of C */}
           <div
             ref={(el) => (avatarRefs.current[0] = el)}
-            className="absolute top-[-10%] left-[-15%] w-[14vw] h-[14vw] min-w-[40px] min-h-[40px] max-w-[70px] max-h-[70px] rounded-full overflow-hidden border-[3px] border-[var(--background)] shadow-2xl z-20 select-none md:top-[6%] md:left-[-15%] md:w-[11.5vw] md:h-[11.5vw] md:min-w-[55px] md:min-h-[55px] md:border-[5px]"
+            className="hidden md:block absolute top-[-10%] left-[-15%] w-[14vw] h-[14vw] min-w-[40px] min-h-[40px] max-w-[70px] max-h-[70px] rounded-full overflow-hidden border-[3px] border-[var(--background)] shadow-2xl z-20 select-none md:top-[6%] md:left-[-15%] md:w-[11.5vw] md:h-[11.5vw] md:min-w-[55px] md:min-h-[55px] md:border-[5px]"
           >
             <Image
               src="/images/avatar1.png"
@@ -153,7 +153,7 @@ export default function Hero() {
           {/* Avatar 2: Placed Outside Top right area */}
           <div
             ref={(el) => (avatarRefs.current[1] = el)}
-            className="absolute top-[-10%] left-[95%] w-[14vw] h-[14vw] min-w-[40px] min-h-[40px] max-w-[70px] max-h-[70px] rounded-full overflow-hidden border-[3px] border-[var(--background)] shadow-2xl z-20 select-none md:top-[6%] md:left-[103%] md:w-[11.5vw] md:h-[11.5vw] md:min-w-[55px] md:min-h-[55px] md:border-[5px]"
+            className="hidden md:block absolute top-[-10%] left-[95%] w-[14vw] h-[14vw] min-w-[40px] min-h-[40px] max-w-[70px] max-h-[70px] rounded-full overflow-hidden border-[3px] border-[var(--background)] shadow-2xl z-20 select-none md:top-[6%] md:left-[103%] md:w-[11.5vw] md:h-[11.5vw] md:min-w-[55px] md:min-h-[55px] md:border-[5px]"
           >
             <Image
               src="/images/avatar2.png"
@@ -167,7 +167,7 @@ export default function Hero() {
           {/* Avatar 3: Placed Outside Bottom Left area */}
           <div
             ref={(el) => (avatarRefs.current[2] = el)}
-            className="absolute bottom-[-8%] left-[-10%] w-[14vw] h-[14vw] min-w-[40px] min-h-[40px] max-w-[70px] max-h-[70px] rounded-full overflow-hidden border-[3px] border-[var(--background)] shadow-2xl z-20 select-none md:bottom-[8%] md:left-[-12%] md:w-[11.5vw] md:h-[11.5vw] md:min-w-[55px] md:min-h-[55px] md:border-[5px]"
+            className="hidden md:block absolute bottom-[-8%] left-[-10%] w-[14vw] h-[14vw] min-w-[40px] min-h-[40px] max-w-[70px] max-h-[70px] rounded-full overflow-hidden border-[3px] border-[var(--background)] shadow-2xl z-20 select-none md:bottom-[8%] md:left-[-12%] md:w-[11.5vw] md:h-[11.5vw] md:min-w-[55px] md:min-h-[55px] md:border-[5px]"
           >
             <Image
               src="/images/avatar3.png"
@@ -181,7 +181,7 @@ export default function Hero() {
           {/* Avatar 4: Placed Outside Bottom Right area */}
           <div
             ref={(el) => (avatarRefs.current[3] = el)}
-            className="absolute bottom-[10%] left-[95%] w-[14vw] h-[14vw] min-w-[40px] min-h-[40px] max-w-[70px] max-h-[70px] rounded-full overflow-hidden border-[3px] border-[var(--background)] shadow-2xl z-20 select-none md:bottom-[22%] md:left-[101%] md:w-[11.5vw] md:h-[11.5vw] md:min-w-[55px] md:min-h-[55px] md:border-[5px]"
+            className="hidden md:block absolute bottom-[10%] left-[95%] w-[14vw] h-[14vw] min-w-[40px] min-h-[40px] max-w-[70px] max-h-[70px] rounded-full overflow-hidden border-[3px] border-[var(--background)] shadow-2xl z-20 select-none md:bottom-[22%] md:left-[101%] md:w-[11.5vw] md:h-[11.5vw] md:min-w-[55px] md:min-h-[55px] md:border-[5px]"
           >
             <Image
               src="/images/avatar4.png"

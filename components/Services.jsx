@@ -190,7 +190,7 @@ export default function Services() {
           {/* Right Column: Titles */}
           <div className="col-span-1 md:col-span-7 flex flex-col justify-center pl-0 md:pl-12">
             {/* Category Marker */}
-            <span className="text-[#b4fe1e] italic text-sm md:text-base font-semibold mb-4 block select-none">
+            <span className="text-[#9b87f5] italic text-sm md:text-base font-semibold mb-4 block select-none">
               services
             </span>
             
@@ -226,7 +226,7 @@ export default function Services() {
 
       {/* Mobile/Tablet Services List (Visible below lg breakpoint) */}
       <div className="lg:hidden max-w-7xl mx-auto px-6 relative z-10">
-        <span className="text-[#b4fe1e] italic text-sm font-semibold mb-3 block select-none">
+        <span className="text-[#9b87f5] italic text-sm font-semibold mb-3 block select-none">
           our services
         </span>
         <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[var(--text-black-custom)] mb-12 leading-tight">
@@ -236,7 +236,7 @@ export default function Services() {
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="mobile-service-card group relative rounded-2xl overflow-hidden aspect-[16/9] sm:aspect-[4/3] border border-[var(--border-color-custom)] bg-[var(--card)] hover:border-[#b4fe1e]/20 hover:shadow-xl hover:shadow-[#b4fe1e]/5 transition-all duration-300 flex flex-col justify-end p-6 sm:p-8"
+              className="mobile-service-card group relative rounded-2xl overflow-hidden aspect-[16/9] sm:aspect-[4/3] border border-[var(--border-color-custom)] bg-[var(--card)] hover:border-[#9b87f5]/20 hover:shadow-xl hover:shadow-[#9b87f5]/5 transition-all duration-300 flex flex-col justify-end p-6 sm:p-8"
             >
               {/* Background Service Image */}
               <div className="absolute inset-0 z-0 overflow-hidden">
